@@ -20,4 +20,4 @@ api_response = client.chat(
   }
 )
 
-pp api_response
+pp api_response["choices"][0]["message"]["content"]
