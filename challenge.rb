@@ -1,6 +1,7 @@
 require "openai"
 
 client = OpenAI::Client.new(access_token: ENV.fetch("OPEN_AI_KEY"))
+messages = []
 
 while true do
   puts "Hello! How can I help you today?"
@@ -13,18 +14,19 @@ while true do
     message_list = [
       {
         "role" => "system",
-        "content" => "You are a helpful assistant who talks like the King James Bible."
+        "content" => "You are a helpful assistant who talks like JJ Walker from Good Times."
       },
       {
         "role" => "user",
         "content" => "#{request}"
       }
     ]
+    messages += message_list
 
     api_response = client.chat(
       parameters: {
         model: "gpt-3.5-turbo",
-        messages: message_list
+        messages: messages
       }
     )
 
